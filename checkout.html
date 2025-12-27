@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout — REIGNX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a class="logo" href="index.html">REIGNX</a>
+  </div>
+</nav>
+  <!-- CHECKOUT STEPS -->
+	<div class="checkout-steps">
+	  <div class="step completed">Cart</div>
+	  <div class="step active">Address</div>
+	  <div class="step">Payment</div>
+	</div>
+<main class="cart-page">
+  <h1 class="cart-title">Checkout</h1>
+
+  <div class="cart-layout">
+    <!-- LEFT: ADDRESS -->
+    <div class="checkout-form">
+	  <h2>Shipping Address</h2>
+
+	  <input class="field" type="text" placeholder="Full Name" required />
+	  <input class="field" type="text" placeholder="Address Line" required />
+
+	  <div class="grid-2">
+		<input class="field" type="text" placeholder="City" required />
+		<input class="field" type="text" placeholder="Pincode" required />
+	  </div>
+
+	  <input class="field" type="text" placeholder="Phone Number" required />
+
+	  <button class="checkout-btn" onclick="goToPayment()">
+		Continue to Payment
+	  </button>
+	</div>
+
+    <!-- RIGHT: SUMMARY -->
+    <div class="cart-summary">
+      <h2>Order Summary</h2>
+      <p>Total: ₹<strong><span id="cart-total">0</span></strong></p>
+    </div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+<script>
+  function goToPayment() {
+    window.location.href = "payment.html";
+  }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    renderCartTotalOnly();
+    updateCartCount();
+  });
+</script>
+
+</body>
+</html>

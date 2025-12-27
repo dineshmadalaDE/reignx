@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>REIGNX — Collections</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+	<nav class="navbar">
+
+	  <!-- LEFT -->
+	  <div class="nav-left">
+		<a class="logo" href="index.html">REIGNX</a>
+	  </div>
+
+	  <!-- CENTER -->
+	  <ul class="nav-links">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="collections.html">Collections</a></li>
+		<li><a href="about.html">About</a></li>
+		<li><a href="contact.html">Contact</a></li>
+	  </ul>
+
+	  <!-- RIGHT -->
+	  <div class="nav-right">
+	  <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+	  <a href="javascript:void(0)" class="cart-icon" onclick="toggleCart()">
+		  🛒 <span id="cart-count">0</span>
+	  </a>
+	  </div>
+
+	</nav>
+
+
+  <!-- COLLECTIONS -->
+  <section class="collections fade-in">
+    <h1>Collections</h1>
+
+    <!-- GEN Z -->
+    <div class="collection-section fade-in">
+      <h2>GEN Z DROP</h2>
+      <div class="grid">
+        <a href="product-oversized-hoodie.html" class="card product-card">
+		  <img src="images/genz/oversized-hoodie.png" alt="Oversized Hoodie" loading="lazy">
+		  <div class="overlay">
+			<span>Oversized Hoodie</span>
+		  </div>
+		</a>
+        <a href="product-street-tee.html" class="card product-card">
+		  <img src="images/genz/street-tee.png" alt="Street Tee" loading="lazy">
+		  <div class="overlay">
+			<span>Street Tee</span>
+		  </div>
+		</a>
+        <a href="product-urban-jacket.html" class="card product-card">
+		  <img src="images/genz/urban-jacket.png" alt="Urban Jacket" loading="lazy">
+		  <div class="overlay">
+			<span>Urban Jacket</span>
+		  </div>
+		</a>
+      </div>
+    </div>
+
+    <!-- 90s -->
+    <div class="collection-section fade-in">
+      <h2>90’s CLASSICS</h2>
+      <!-- <div class="grid">
+        <a href="product-retro-hoodie.html" class="card product-card">
+		  <img src="images/90s/retro-hoodie.png" alt="Retro Hoodie" loading="lazy">
+		  <div class="overlay">
+			<span>Retro Hoodie</span>
+		  </div>
+		</a>
+        <a href="product-vintage-tee.html" class="card product-card">
+		  <img src="images/90s/vintage-tee.png" alt="Vintage Tee" loading="lazy">
+		  <div class="overlay">
+			<span>Vintage Tee</span>
+		  </div>
+		</a>
+        <a href="product-classic-sweatshirt.html" class="card product-card">
+		  <img src="images/90s/classic-sweatshirt.png" alt="Classic Sweatshirt" loading="lazy">
+		  <div class="overlay">
+			<span>Classic Sweatshirt</span>
+		  </div>
+		</a>
+      </div> -->
+    </div>
+
+    <!-- GEN X -->
+    <div class="collection-section fade-in">
+      <h2>GEN X EDIT</h2>
+      <!-- <div class="grid">
+        <a href="product-minimal-jacket.html" class="card product-card">
+		  <img src="images/genx/minimal-jacket.png" alt="Minimal Jacket" loading="lazy">
+		  <div class="overlay">
+			<span>Minimal Jacket</span>
+		  </div>
+		</a>
+        <a href="product-premium-tee.html" class="card product-card">
+		  <img src="images/genx/premium-tee.png" alt="Premium Tee" loading="lazy">
+		  <div class="overlay">
+			<span>Premium Tee</span>
+		  </div>
+		</a>
+        <a href="product-essential-hoodie.html" class="card product-card">
+		  <img src="images/genx/essential-hoodie.png" alt="Essential Hoodie" loading="lazy">
+		  <div class="overlay">
+			<span>Essential Hoodie</span>
+		  </div>
+		</a>
+      </div> -->
+    </div>
+
+  </section>
+
+  <footer>
+    <p>© 2025 REIGNX — Launching Soon</p>
+  </footer>
+
+<script src="script.js"></script>
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3>Your Bag</h3>
+    <span class="close-cart" onclick="toggleCart()">✕</span>
+  </div>
+
+  <div id="cart-items" class="cart-items"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      Total: ₹<span id="cart-total">0</span>
+    </div>
+    <a href="cart.html" class="checkout-btn">View Cart</a>
+  </div>
+</div>
+</body>
+</html>

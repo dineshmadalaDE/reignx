@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Street Tee — REIGNX</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+<!-- IMAGE LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <span class="nav prev" onclick="prevImage()">‹</span>
+
+  <img id="lightbox-img" src="" alt="Product Preview">
+
+  <span class="nav next" onclick="nextImage()">›</span>
+
+  <span class="close" onclick="closeLightbox()">×</span>
+</div>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <!-- <div class="logo">REIGNX</div> -->
+	<div class="nav-left">
+		<a class="logo" href="index.html">REIGNX</a>
+	</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="collections.html">Collections</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+  <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+  <a href="cart.html" class="cart-icon" aria-label="Cart">
+    🛒 <span id="cart-count">0</span>
+  </a>
+</div>
+</nav>
+
+<!-- PRODUCT -->
+<section class="product-page fade-in">
+
+  <!-- GALLERY -->
+  <div class="product-gallery">
+	<!-- MAIN IMAGE -->
+	<div class="main-image">
+		<img id="currentImage"
+		 src="images/genz/street-tee/street-tee-front.png"
+		 alt="Street Tee"
+		 onclick="openLightbox(0, productImages)"
+		 style="cursor: zoom-in;">
+	</div>
+    <div class="thumbnails">
+		<img src="images/genz/street-tee/street-tee-front.png"
+			 onclick="changeImage(this.src);
+			 openLightbox(0, productImages)"
+			 class="active">
+
+		<img src="images/genz/street-tee/street-tee-back.png"
+			 onclick="changeImage(this.src);
+			 openLightbox(1, productImages)">
+
+		<img src="images/genz/street-tee/street-tee-zoom.png"
+			 onclick="changeImage(this.src);
+			 openLightbox(2, productImages)">
+	  </div>
+  </div>
+
+  <!-- INFO -->
+  <div 
+	  class="product-info"
+	  data-id="street-tee"
+	  data-name="Street Tee"
+	  data-price="999"
+	  data-image="images/genz/street-tee/street-tee-front.png"
+	>
+  <!-- LOADING STATE -->
+  <p id="productLoading" class="loading-text">
+    Loading availability…
+  </p>
+
+  <!-- PRODUCT META (HIDDEN INITIALLY) -->
+  <div id="productMeta" class="hidden">
+
+    <p class="price" id="productPrice"></p>
+
+    <!-- SIZES -->
+    <div class="sizes fade-in">
+	  <button class="size-btn" data-size="XS">XS</button>
+	  <button class="size-btn" data-size="S">S</button>
+	  <button class="size-btn" data-size="M">M</button>
+	  <button class="size-btn" data-size="L">L</button>
+	  <button class="size-btn" data-size="XL">XL</button>
+	  <button class="size-btn" data-size="XXL">XXL</button>
+	</div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+	  <button class="add-bag" onclick="addToCart()">Add to Bag</button>
+      <button class="wishlist">♡</button>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="description">
+      <h3>Product Details</h3>
+      <ul>
+        <li>100% Pure Cotton</li>
+        <li>240 GSM Heavy Fabric</li>
+        <li>Bio-washed & pre-shrunk</li>
+        <li>Soft on skin</li>
+        <li>Color fastness guaranteed</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- RELATED PRODUCTS -->
+<section class="related fade-in">
+  <h2>You may also like</h2>
+  <div class="related-grid">
+	  <a href="product-street-tee.html" class="related-card">
+		<img src="images/genz/street-tee.png" alt="Street Tee">
+		<span>Street Tee</span>
+	  </a>
+
+	  <a href="product-urban-jacket.html" class="related-card">
+		<img src="images/genz/urban-jacket.png" alt="Urban Jacket">
+		<span>Urban Jacket</span>
+	  </a>
+
+	  <a href="product-retro-hoodie.html" class="related-card">
+		<img src="images/90s/retro-hoodie.png" alt="Retro Hoodie">
+		<span>Retro Hoodie</span>
+	  </a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews fade-in">
+  <h2>Customer Reviews</h2>
+  <p>⭐ ⭐ ⭐ ⭐ ⭐</p>
+  <p>“Premium quality and perfect fit.”</p>
+  <p>“Feels Relax.”</p>
+</section>
+
+<footer>
+  <p>© 2025 REIGNX — Own Your Era</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  const productImages = [
+    "images/genz/street-tee/street-tee-front.png",
+    "images/genz/street-tee/street-tee-back.png",
+    "images/genz/street-tee/street-tee-zoom.png"
+  ];
+</script>
+</body>
+</html>

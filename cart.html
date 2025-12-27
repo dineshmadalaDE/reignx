@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cart — REIGNX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-left">
+    <a class="logo" href="index.html">REIGNX</a>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="collections.html">Collections</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+    <a href="cart.html" class="cart-icon">
+      🛒 <span id="cart-count">0</span>
+    </a>
+  </div>
+</nav>
+  <!-- CHECKOUT STEPS -->
+  <div class="checkout-steps">
+	  <div class="step active">Cart</div>
+	  <div class="step">Address</div>
+	  <div class="step">Payment</div>
+  </div>
+<!-- CART PAGE -->
+<main class="cart-page">
+  <h1 class="cart-title">Your Cart</h1>
+
+  <div class="cart-layout">
+    <!-- LEFT: ITEMS -->
+    <div id="cart-items" class="cart-items"></div>
+
+    <!-- RIGHT: SUMMARY -->
+    <div class="cart-summary">
+      <h2>Order Summary</h2>
+      <p>Subtotal: <strong>₹<span id="cart-total">0</span></strong></p>
+
+      <button class="checkout-btn" onclick="window.location.href='checkout.html'">
+		  Proceed to Checkout
+	  </button>
+    </div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment — REIGNX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a class="logo" href="index.html">REIGNX</a>
+  </div>
+</nav>
+  <!-- CHECKOUT STEPS -->
+	<div class="checkout-steps">
+	  <div class="step completed">Cart</div>
+	  <div class="step completed">Address</div>
+	  <div class="step active">Payment</div>
+	</div>
+<main class="cart-page">
+  <h1 class="cart-title">Payment</h1>
+
+  <div class="cart-layout">
+    <div class="cart-items">
+      <h2>Select Payment Method</h2>
+
+      <label><input type="radio" name="pay" checked /> Credit / Debit Card</label><br>
+      <label><input type="radio" name="pay" /> UPI</label><br>
+      <label><input type="radio" name="pay" /> Cash on Delivery</label><br>
+
+      <button class="checkout-btn" onclick="placeOrder()">
+        Place Order
+      </button>
+    </div>
+
+    <div class="cart-summary">
+      <h2>Order Total</h2>
+      <p>₹<strong><span id="cart-total">0</span></strong></p>
+    </div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+<script>
+  renderCartTotalOnly();
+</script>
+</body>
+</html>

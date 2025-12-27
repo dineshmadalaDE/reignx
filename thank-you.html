@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>REIGNX — Thanks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .box {
+      max-width: 520px;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      letter-spacing: 4px;
+    }
+
+    p {
+      opacity: 0.8;
+      margin-bottom: 25px;
+    }
+
+    .count {
+      font-size: 18px;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+
+    a {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+      letter-spacing: 2px;
+    }
+
+    a:hover {
+      background: #fff;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>THANK YOU</h1>
+    <p>You’re officially on the REIGNX Family.</p>
+
+    <div class="count">
+      Redirecting to home in <span id="seconds">10</span> seconds
+    </div>
+
+    <a href="index.html">Go back now</a>
+  </div>
+
+  <script>
+    let time = 10;
+    const el = document.getElementById("seconds");
+
+    const timer = setInterval(() => {
+      time--;
+      el.textContent = time;
+
+      if (time === 0) {
+        clearInterval(timer);
+        window.location.href = "index.html";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>

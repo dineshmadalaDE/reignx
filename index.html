@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>REIGNX — Own Your Era</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <!-- <div class="logo">REIGNX</div> -->
+	<div class="nav-left">
+		<a class="logo" href="index.html">REIGNX</a>
+	</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+	<div class="nav-right">
+	<span class="menu-toggle" onclick="toggleMenu()">☰</span>
+	<a href="javascript:void(0)" class="cart-icon" onclick="toggleCart()">
+	  🛒 <span id="cart-count">0</span>
+	</a>
+	</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>REIGNX</h1>
+      <p>Own Your Era</p>
+      <a href="collections.html" class="btn">Explore the Drop</a>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy fade-in">
+    <h2>Not Just Clothing</h2>
+    <p>
+      REIGNX represents generations that never followed rules —
+      they created their own. From 90’s rebels to Gen Z creators,
+      this is fashion built on confidence, culture, and attitude.
+    </p>
+  </section>
+	<!-- COMING SOON -->
+	<section class="coming-soon fade-in">
+	  <h2 class="pulse-text">COMING SOON</h2>
+
+	  <p class="coming-sub">
+		Something iconic is on the way.
+	  </p>
+
+	  <!-- COUNTDOWN -->
+	  <div class="countdown">
+		<div>
+		  <span id="days">00</span>
+		  <small>DAYS</small>
+		</div>
+		<div>
+		  <span id="hours">00</span>
+		  <small>HOURS</small>
+		</div>
+		<div>
+		  <span id="minutes">00</span>
+		  <small>MIN</small>
+		</div>
+		<div>
+		  <span id="seconds">00</span>
+		  <small>SEC</small>
+		</div>
+	  </div>
+	  <!-- INSTAGRAM CTA -->
+	  <div class="insta-cta">
+		  <p>Follow our journey on Instagram</p>
+		  <a href="https://www.instagram.com/reignx_ftv/" target="_blank">
+			@reignx_ftv
+		  </a>
+	  </div>
+
+	  <!-- NEWSLETTER PLACEHOLDER -->
+	  <p class="newsletter-note">
+		Get notified when we launch.
+	  </p>
+	  <form
+		  id="interestForm"
+		  action="https://formsubmit.co/reignxcustomercare@gmail.com"
+		  method="POST"
+		  onsubmit="return handleInterest(event)"
+		>
+		  <input
+			type="text"
+			id="interestInput"
+			name="interest"
+			placeholder="Email or Instagram username"
+			required
+		  />
+
+		  <!-- FormSubmit config -->
+		  <input type="hidden" name="_subject" value="New REIGNX Launch Interest">
+		  <input type="hidden" name="_captcha" value="false">
+		  <input type="hidden" name="_next" value="https://reignx.netlify.app/thank-you.html">
+		  <button type="submit">Notify Me</button>
+	  </form>
+	</section>  
+    <!-- upto here we can remove after launch -->
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 REIGNX. All rights reserved.</p>
+  </footer>
+
+<script src="script.js"></script>
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3>Your Bag</h3>
+    <span class="close-cart" onclick="toggleCart()">✕</span>
+  </div>
+
+  <div id="cart-items" class="cart-items"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      Total: ₹<span id="cart-total">0</span>
+    </div>
+    <a href="cart.html" class="checkout-btn">View Cart</a>
+  </div>
+</div>
+
+</body>
+</html>

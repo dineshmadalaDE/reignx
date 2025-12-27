@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — REIGNX</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+	<nav class="navbar">
+
+	  <!-- LEFT -->
+	  <div class="nav-left">
+		<a class="logo" href="index.html">REIGNX</a>
+	  </div>
+
+	  <!-- CENTER -->
+	  <ul class="nav-links">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="collections.html">Collections</a></li>
+		<li><a href="about.html">About</a></li>
+		<li><a href="contact.html">Contact</a></li>
+	  </ul>
+
+	  <!-- RIGHT -->
+	  <div class="nav-right">
+	  <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+	  <a href="javascript:void(0)" class="cart-icon" onclick="toggleCart()">
+		  🛒 <span id="cart-count">0</span>
+	  </a>
+	  </div>
+
+	</nav>
+
+
+  <!-- CONTACT -->
+  <section class="contact fade-in">
+    <h1>Contact</h1>
+
+    <p class="subtitle">
+      Questions, collaborations, or just vibing with REIGNX?
+    </p>
+
+    <div class="contact-box">
+      <a href="https://www.instagram.com/reignx_ftv/" target="_blank" class="contact-item">
+        Instagram
+      </a>
+
+      <a href="mailto:reignxcustomercare@gmail.com" class="contact-item">
+        reignxcustomercare@gmail.com
+      </a>
+    </div>
+
+    <p class="launch-note">
+      We’re building something special.  
+      Full launch coming soon.
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 REIGNX — Own Your Era</p>
+  </footer>
+
+<script src="script.js"></script>
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3>Your Bag</h3>
+    <span class="close-cart" onclick="toggleCart()">✕</span>
+  </div>
+
+  <div id="cart-items" class="cart-items"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      Total: ₹<span id="cart-total">0</span>
+    </div>
+    <a href="cart.html" class="checkout-btn">View Cart</a>
+  </div>
+</div>
+</body>
+</html>
