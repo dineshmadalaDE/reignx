@@ -42,29 +42,58 @@
       opacity: 0.6;
       margin-top: 30px;
     }
+    /* Go Back Button – Premium Style */
+    .home-btn {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 42px;
+      border: 1px solid rgba(255,255,255,0.6);
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 2px;
+      font-size: 14px;
+      transition: all 0.35s ease;
+    }
+
+    .home-btn:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(255,255,255,0.15);
+    }
   </style>
 </head>
 <body>
 
   <div class="box">
     <h1>THANK YOU</h1>
+
     <p>
       Your order has been placed successfully.<br>
+      You will receive an <strong>official confirmation email</strong> shortly.
+    </p>
+
+    <p>
       Welcome to the <strong>REIGNX</strong> movement.
     </p>
 
     <p>
       We don’t follow trends — we create them.<br>
-      Your era starts now.
+      <strong>Your era starts now.</strong>
     </p>
 
     <div class="count">
-      Redirecting you back to home in <span id="seconds">5</span> seconds
+      Redirecting you back to home in <span id="seconds">7</span>
     </div>
+
+    <a href="index.html" class="home-btn">
+      Go back now
+    </a>
   </div>
 
+
   <script>
-    let time = 10;
+    let time = 30;
     const el = document.getElementById("seconds");
 
     const timer = setInterval(() => {
