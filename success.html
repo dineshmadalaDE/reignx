@@ -2,20 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Order Placed — REIGNX</title>
+  <title>Order Confirmed — REIGNX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .box {
+      max-width: 520px;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      letter-spacing: 4px;
+    }
+
+    p {
+      opacity: 0.85;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .count {
+      font-size: 14px;
+      letter-spacing: 2px;
+      opacity: 0.6;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
 
-<main class="cart-page" style="text-align:center">
-  <h1>🎉 Order Placed!</h1>
-  <p>Thank you for shopping with REIGNX.</p>
+  <div class="box">
+    <h1>THANK YOU</h1>
+    <p>
+      Your order has been placed successfully.<br>
+      Welcome to the <strong>REIGNX</strong> movement.
+    </p>
 
-  <a href="index.html" class="checkout-btn">
-    Continue Shopping
-  </a>
-</main>
+    <p>
+      We don’t follow trends — we create them.<br>
+      Your era starts now.
+    </p>
+
+    <div class="count">
+      Redirecting you back to home in <span id="seconds">5</span> seconds
+    </div>
+  </div>
+
+  <script>
+    let time = 10;
+    const el = document.getElementById("seconds");
+
+    const timer = setInterval(() => {
+      time--;
+      el.textContent = time;
+
+      if (time === 0) {
+        clearInterval(timer);
+        window.location.href = "index.html";
+      }
+    }, 1000);
+  </script>
 
 </body>
 </html>

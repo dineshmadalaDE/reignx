@@ -28,6 +28,7 @@
 	  <h2>Shipping Address</h2>
 
 	  <input class="field" type="text" placeholder="Full Name" required />
+    <input class="field" type="text" placeholder="Email Address" required />
 	  <input class="field" type="text" placeholder="Address Line" required />
 
 	  <div class="grid-2">
@@ -40,6 +41,14 @@
 	  <button class="checkout-btn" onclick="goToPayment()">
 		Continue to Payment
 	  </button>
+    <button
+      class="checkout-btn"
+      style="margin-bottom:20px;background:#111;color:#fff;border:1px solid #333"
+      onclick="window.location.href='cart.html'"
+    >
+      ← Back to Cart
+    </button>
+
 	</div>
 
     <!-- RIGHT: SUMMARY -->
@@ -52,9 +61,24 @@
 
 <script src="script.js"></script>
 <script>
-  function goToPayment() {
-    window.location.href = "payment.html";
+function goToPayment() {
+  const details = {
+    name: document.querySelector('input[placeholder="Full Name"]').value,
+    address: document.querySelector('input[placeholder="Address Line"]').value,
+    city: document.querySelector('input[placeholder="City"]').value,
+    pincode: document.querySelector('input[placeholder="Pincode"]').value,
+    phone: document.querySelector('input[placeholder="Phone Number"]').value
+  };
+
+  // Basic validation
+  if (!details.name || !details.address || !details.city || !details.pincode || !details.phone) {
+    alert("Please fill all address details");
+    return;
   }
+
+  localStorage.setItem("checkoutDetails", JSON.stringify(details));
+  window.location.href = "payment.html";
+}
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
