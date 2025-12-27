@@ -113,20 +113,29 @@ async function confirmUpiPayment() {
   form.action = "https://formsubmit.co/reignxcustomercare@gmail.com";
   form.method = "POST";
 
+  // ✅ Make order_details safe (only important info)
+  const safeCart = cart.map(i => ({
+    id: i.id,
+    name: i.name,
+    size: i.size,
+    qty: Number(i.quantity || 1),
+    price: Number(i.price || 0)
+  }));
+
   const fields = {
     _subject: "NEW UPI ORDER — REIGNX",
     _captcha: "false",
-
-    // ✅ ADD THIS LINE
     _next: "https://reignx.in/success.html",
 
-    name: orderData.name,
-    phone: orderData.phone,
-    address: orderData.address,
-    payment_method: orderData.payment_method,
-    order_details: JSON.stringify(orderData.order)
-  };
+    // ✅ INCLUDE CUSTOMER EMAIL (missing in your current code)
+    customer_name: user.name,
+    customer_email: user.email,
+    customer_phone: user.phone,
+    customer_address: `${user.address}, ${user.city} - ${user.pincode}`,
 
+    payment_method: "UPI",
+    order_details: JSON.stringify(safeCart)
+  };
 
   for (const key in fields) {
     const input = document.createElement("input");
@@ -142,8 +151,8 @@ async function confirmUpiPayment() {
   try {
     await reduceInventoryAfterOrder(cart);
   } catch (e) {
-    alert("Inventory update failed. Try again.");
-    return;
+    console.warn("Inventory update failed:", e);
+    // ✅ DO NOT STOP EMAIL FLOW
   }
 
   // Clear cart + checkout info
@@ -153,7 +162,5 @@ async function confirmUpiPayment() {
   form.submit();
 }
 </script>
-
-
 </body>
 </html>
