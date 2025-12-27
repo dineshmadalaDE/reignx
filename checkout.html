@@ -64,6 +64,7 @@
 function goToPayment() {
   const details = {
     name: document.querySelector('input[placeholder="Full Name"]').value,
+    email: document.querySelector('input[placeholder="Email Address"]').value,
     address: document.querySelector('input[placeholder="Address Line"]').value,
     city: document.querySelector('input[placeholder="City"]').value,
     pincode: document.querySelector('input[placeholder="Pincode"]').value,
@@ -71,7 +72,7 @@ function goToPayment() {
   };
 
   // Basic validation
-  if (!details.name || !details.address || !details.city || !details.pincode || !details.phone) {
+  if (!details.name || !details.email || !details.address || !details.city || !details.pincode || !details.phone) {
     alert("Please fill all address details");
     return;
   }

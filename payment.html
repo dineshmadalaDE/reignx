@@ -129,7 +129,8 @@ async function confirmUpiPayment() {
 
     // ✅ INCLUDE CUSTOMER EMAIL (missing in your current code)
     customer_name: user.name,
-    customer_email: user.email,
+    email: user.email, 
+    customer_email: user.email, 
     customer_phone: user.phone,
     customer_address: `${user.address}, ${user.city} - ${user.pincode}`,
 
@@ -162,5 +163,7 @@ async function confirmUpiPayment() {
   form.submit();
 }
 </script>
+
+
 </body>
 </html>
