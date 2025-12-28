@@ -1227,3 +1227,28 @@ footer {
   }
 }
 
+/* SIZE BUTTONS – PREMIUM */
+.size-btn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px 16px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.25s ease;
+}
+
+/* Hover glow */
+.size-btn:hover {
+  border-color: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+
+/* Active (selected) */
+.size-btn.active {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  box-shadow: 0 0 14px rgba(255,255,255,0.4);
+}
