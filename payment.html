@@ -122,20 +122,26 @@ async function confirmUpiPayment() {
     price: Number(i.price || 0)
   }));
 
+  const productList = safeCart
+    .map(i => `${i.name} (${i.size}) x ${i.qty}`)
+    .join(", ");
+
   const fields = {
     _subject: "NEW UPI ORDER — REIGNX",
     _captcha: "false",
     _next: "https://reignx.in/success.html",
 
-    // ✅ INCLUDE CUSTOMER EMAIL (missing in your current code)
     customer_name: user.name,
-    email: user.email, 
-    customer_email: user.email, 
+    customer_email: user.email,
     customer_phone: user.phone,
     customer_address: `${user.address}, ${user.city} - ${user.pincode}`,
 
     payment_method: "UPI",
-    order_details: JSON.stringify(safeCart)
+
+    // 🔥 THIS FIXES URBAN JACKET EMAIL ISSUE
+    products: productList,
+
+    order_details: JSON.stringify(safeCart, null, 2)
   };
 
   for (const key in fields) {
