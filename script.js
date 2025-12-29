@@ -20,15 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
   fadeElements.forEach(el => observer.observe(el));
 });
 
-function changeImage(src) {
+// function changeImage(src) {
+//   const mainImage = document.getElementById("currentImage");
+//   mainImage.src = src;
+
+//   document.querySelectorAll(".thumbnails img")
+//     .forEach(img => img.classList.remove("active"));
+
+//   event.target.classList.add("active");
+// }
+
+function changeImage(src, index) {
   const mainImage = document.getElementById("currentImage");
   mainImage.src = src;
 
+  // track selected image index for lightbox
+  currentIndex = index;
+
+  // active thumbnail highlight
   document.querySelectorAll(".thumbnails img")
     .forEach(img => img.classList.remove("active"));
 
-  event.target.classList.add("active");
+  // use the clicked thumbnail (event is available from inline onclick)
+  if (typeof event !== "undefined" && event?.target) {
+    event.target.classList.add("active");
+  }
 }
+
+
 // ---------- PRODUCT LIGHTBOX (GLOBAL) ----------
 let galleryImages = [];
 let currentIndex = 0;
@@ -472,7 +491,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// PRODUCT INFO TABS
+document.querySelectorAll(".info-tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".info-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".info-panel").forEach(p => p.classList.remove("active"));
 
+    tab.classList.add("active");
+    document.getElementById(`info-${tab.dataset.info}`).classList.add("active");
+  });
+});
 
 function getCart() {
   return JSON.parse(localStorage.getItem("cart")) || [];

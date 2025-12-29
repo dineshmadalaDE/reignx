@@ -49,22 +49,19 @@
 		<img id="currentImage"
 		 src="images/genz/street-tee/street-tee-front.png"
 		 alt="Street Tee"
-		 onclick="openLightbox(0, productImages)"
+		 onclick="openLightbox(currentIndex, productImages)"
 		 style="cursor: zoom-in;">
 	</div>
     <div class="thumbnails">
 		<img src="images/genz/street-tee/street-tee-front.png"
-			 onclick="changeImage(this.src);
-			 openLightbox(0, productImages)"
+			 onclick="changeImage(this.src, 0)"
 			 class="active">
 
 		<img src="images/genz/street-tee/street-tee-back.png"
-			 onclick="changeImage(this.src);
-			 openLightbox(1, productImages)">
+			 onclick="changeImage(this.src, 1)">
 
 		<img src="images/genz/street-tee/street-tee-zoom.png"
-			 onclick="changeImage(this.src);
-			 openLightbox(2, productImages)">
+			 onclick="changeImage(this.src, 2)">
 	  </div>
   </div>
 
@@ -98,30 +95,92 @@
 
     <!-- ACTIONS -->
     <div class="actions">
-	  <button class="add-bag" onclick="addToCart()">Add to Bag</button>
-      <button class="wishlist">♡</button>
+	  <button class="add-bag" onclick="addToCart()" disabled>
+      Add to Bag
+    </button>
+    </div>
+  </div>
+</section>
+<!-- PRODUCT INFO SECTION -->
+<section class="product-info-section section">
+  <div class="surface">
+
+  <div class="info-tabs">
+    <button class="info-tab active" data-info="desc">DESCRIPTION</button>
+    <button class="info-tab" data-info="details">DETAILS</button>
+    <button class="info-tab" data-info="shipping">SHIPPING</button>
+  </div>
+
+  <div class="info-content">
+
+    <div class="info-panel active" id="info-desc">
+      <p>
+        The REIGNX Oversized Hoodie is built for comfort and presence.
+        Designed with a relaxed silhouette, premium fabric,
+        and refined street aesthetics for everyday wear.
+      </p>
     </div>
 
-    <!-- DESCRIPTION -->
-    <div class="description">
-      <h3>Product Details</h3>
+    <div class="info-panel" id="info-details">
       <ul>
-        <li>100% Pure Cotton</li>
-        <li>240 GSM Heavy Fabric</li>
-        <li>Bio-washed & pre-shrunk</li>
-        <li>Soft on skin</li>
-        <li>Color fastness guaranteed</li>
-        <li>10 days return & refund policy</li>
+        <li>100% Cotton</li>
+        <li>Weight – 260 GSM</li>
+        <li>High density Screen Print</li>
+        <li>Cut and Sew Panel</li>
+        <li>Machine Reverse wash</li>
+      </ul>
+    </div>
+
+    <div class="info-panel" id="info-shipping">
+      <ul>
+        <li>Packed within 24 hours</li>
+        <li>Free delivery Pan-India</li>
+        <li>Dispatches next day</li>
       </ul>
     </div>
 
   </div>
+  </div>
 </section>
+<!-- BRAND EXPERIENCE BLOCK -->
+<section class="brand-experience section">
+  <div class="brand-box surface">
 
+    <div class="experience-item">
+      <h4>STYLE NOTE</h4>
+      <p>
+        Designed to be worn oversized.
+        Size down for a relaxed everyday fit,
+        or stay true-to-size for a bold street silhouette.
+      </p>
+    </div>
+
+    <div class="experience-item">
+      <h4>DESIGN & IDENTITY</h4>
+      <p>
+        REIGNX pieces are built to feel powerful yet effortless.
+        Clean silhouettes, elevated fabrics, and timeless branding
+        define a new era of Indian street luxury.
+      </p>
+    </div>
+
+    <div class="experience-item">
+      <h4>CRAFT & QUALITY</h4>
+      <p>
+        Heavyweight fabric, precise stitching, and long-lasting finishes.
+        Every detail is refined to deliver comfort, durability,
+        and a premium feel that lasts.
+      </p>
+    </div>
+
+  </div>
+</section>
 <!-- RELATED PRODUCTS -->
-<section class="related fade-in">
-  <h2>You may also like</h2>
-  <div class="related-grid">
+<section class="related section fade-in">
+  <h2 class="section-title">You may also like</h2>
+
+  <div class="surface">
+    <div class="related-grid">
 	  <a href="product-street-tee.html" class="related-card">
 		<img src="images/genz/street-tee.png" alt="Street Tee">
 		<span>Street Tee</span>
@@ -137,16 +196,18 @@
 		<span>Retro Hoodie</span>
 	  </a>
   </div>
+</div>
 </section>
 
 <!-- REVIEWS -->
-<section class="reviews fade-in">
-  <h2>Customer Reviews</h2>
-  <p>⭐ ⭐ ⭐ ⭐ ⭐</p>
-  <p>“Premium quality and perfect fit.”</p>
-  <p>“Feels Relax.”</p>
+<section class="reviews section section-tight fade-in">
+  <div class="surface reviews-box">
+    <h2>Customer Reviews</h2>
+    <p>⭐ ⭐ ⭐ ⭐ ☆</p>
+    <p>“Premium quality and perfect fit.”</p>
+    <p>“Feels heavy and luxurious.”</p>
+  </div>
 </section>
-
 <footer>
   <p>© 2025 REIGNX — Own Your Era</p>
 </footer>
