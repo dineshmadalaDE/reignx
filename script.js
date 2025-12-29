@@ -92,25 +92,27 @@ let selectedSize = null;
 const sizeButtons = document.querySelectorAll('.size-btn');
 const addBagBtn = document.querySelector('.add-bag');
 
-// sizeButtons.forEach(btn => {
-//   btn.addEventListener('click', () => {
-//     sizeButtons.forEach(b => b.classList.remove('active'));
-//     btn.classList.add('active');
-//     selectedSize = btn.dataset.size;
-//   });
-// });
 sizeButtons.forEach(btn => {
   btn.addEventListener('click', () => {
+
+    // If clicking the already-selected size → deselect
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+      selectedSize = null;
+
+      addBagBtn.disabled = true;
+      addBagBtn.classList.remove("active");
+      return;
+    }
+
+    // Otherwise select new size
     sizeButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
     selectedSize = btn.dataset.size;
 
-    // ✅ ENABLE BUTTON VISUALLY
-    if (addBagBtn) {
-      addBagBtn.disabled = false;
-      addBagBtn.classList.add("active");
-    }
+    addBagBtn.disabled = false;
+    addBagBtn.classList.add("active");
   });
 });
 
