@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product | REIGNX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a class="logo" href="index.html">REIGNX</a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+      <a href="javascript:void(0)" class="cart-icon" onclick="toggleCart()">
+        🛒 <span id="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- PRODUCT PAGE -->
+  <section class="product-page fade-in">
+
+    <!-- GALLERY -->
+    <div class="product-gallery">
+      <div class="main-image">
+        <!-- Click MAIN image -> open lightbox (script.js function) -->
+        <img
+          id="currentImage"
+          src=""
+          alt="Product Image"
+          style="cursor: zoom-in;"
+          onclick="openLightbox(currentIndex, window.productImages || [])"
+        />
+      </div>
+
+      <!-- IMPORTANT: class must be `thumbnails` because script.js uses `.thumbnails img` -->
+      <div class="thumbnails" id="thumbs"></div>
+    </div>
+
+    <!-- PRODUCT INFO (script.js expects this contract) -->
+    <div
+      class="product-info"
+      data-id=""
+      data-name=""
+      data-price=""
+      data-image=""
+    >
+      <!-- script.js uses these ids to show/hide -->
+      <p id="productLoading" class="loading-text">Loading product…</p>
+
+      <div id="productMeta" class="hidden">
+        <h1 id="productName"></h1>
+
+        <!-- IMPORTANT: script.js updates `.price` element -->
+        <p class="price" id="productPrice">₹0</p>
+
+        <div class="sizes">
+          <button class="size-btn" data-size="XS">XS</button>
+          <button class="size-btn" data-size="S">S</button>
+          <button class="size-btn" data-size="M">M</button>
+          <button class="size-btn" data-size="L">L</button>
+          <button class="size-btn" data-size="XL">XL</button>
+          <button class="size-btn" data-size="XXL">XXL</button>
+        </div>
+
+        <!-- IMPORTANT: keep onclick exactly like this because your script.js addToCart() has no params -->
+        <button class="add-bag" onclick="addToCart()" disabled>
+          Add to Bag
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- DESCRIPTION / DETAILS / SHIPPING (script.js tabs expect data-info + matching ids) -->
+  <section class="product-info-section section">
+    <div class="surface">
+      <div class="info-tabs">
+        <button class="info-tab active" data-info="desc">DESCRIPTION</button>
+        <button class="info-tab" data-info="details">DETAILS</button>
+        <button class="info-tab" data-info="shipping">SHIPPING</button>
+      </div>
+
+      <div class="info-content">
+        <div class="info-panel active" id="info-desc"></div>
+        <div class="info-panel" id="info-details"></div>
+        <div class="info-panel" id="info-shipping"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND EXPERIENCE BLOCK -->
+  <section class="brand-experience section">
+    <div class="brand-box surface">
+      <div class="experience-item">
+        <h4>STYLE NOTE</h4>
+        <p>
+          Designed to be worn oversized.
+          Size down for a relaxed everyday fit,
+          or stay true-to-size for a bold street silhouette.
+        </p>
+      </div>
+
+      <div class="experience-item">
+        <h4>DESIGN & IDENTITY</h4>
+        <p>
+          REIGNX pieces are built to feel powerful yet effortless.
+          Clean silhouettes, elevated fabrics, and timeless branding
+          define a new era of Indian street luxury.
+        </p>
+      </div>
+
+      <div class="experience-item">
+        <h4>CRAFT & QUALITY</h4>
+        <p>
+          Heavyweight fabric, precise stitching, and long-lasting finishes.
+          Every detail is refined to deliver comfort, durability,
+          and a premium feel that lasts.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews section section-tight fade-in">
+    <div class="surface reviews-box">
+      <h2>Customer Reviews</h2>
+      <p>⭐ ⭐ ⭐ ⭐ ☆</p>
+      <p>“Premium quality and perfect fit.”</p>
+      <p>“Feels heavy and luxurious.”</p>
+    </div>
+  </section>
+
+  <!-- CART DRAWER -->
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Bag</h3>
+      <span class="close-cart" onclick="toggleCart()">✕</span>
+    </div>
+
+    <div id="cart-items" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        Total: ₹<span id="cart-total">0</span>
+      </div>
+      <a href="cart.html" class="checkout-btn">View Cart</a>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close" onclick="closeLightbox()">×</span>
+    <span class="nav prev" onclick="event.stopPropagation(); prevImage()">‹</span>
+
+    <img
+      id="lightbox-img"
+      src=""
+      alt="Preview"
+      onclick="event.stopPropagation();"
+    />
+
+    <span class="nav next" onclick="event.stopPropagation(); nextImage()">›</span>
+  </div>
+
+  <footer>
+    <p>© 2025 REIGNX — Own Your Era</p>
+  </footer>
+
+  <!-- your existing JS (contains INVENTORY_URL + cart + size + tabs + lightbox etc.) -->
+  <script src="script.js"></script>
+
+  <!-- ONLY PAGE-SPECIFIC LOGIC (NO DUPLICATE OF script.js FUNCTIONS) -->
+  <script>
+    // Read slug from: product.html?slug=STREET-TEE
+    function getSlug() {
+      return new URLSearchParams(window.location.search).get("slug");
+    }
+
+    // Minimal helper ONLY for images (not in script.js).
+    // If your sheet already stores RAW urls, this does nothing.
+    function toRawGitHub(url) {
+      if (!url) return "";
+      const s = String(url);
+      if (s.includes("raw.githubusercontent.com")) return s;
+      if (!s.includes("github.com/")) return s;
+      return s.replace("https://github.com/", "https://raw.githubusercontent.com/")
+              .replace("/blob/", "/");
+    }
+
+    function safeText(v) {
+      return (v == null) ? "" : String(v);
+    }
+
+    function pipeToHtmlList(v) {
+      const txt = safeText(v).trim();
+      if (!txt) return "";
+      const parts = txt.split("|").map(x => x.trim()).filter(Boolean);
+      if (!parts.length) return "";
+      return "<ul>" + parts.map(p => `<li>${p}</li>`).join("") + "</ul>";
+    }
+
+    async function loadProductPage() {
+      const products = await getInventoryCached();
+      // INVENTORY_URL is defined in script.js
+      if (typeof INVENTORY_URL === "undefined") {
+        document.body.innerHTML = "<h2 style='padding:40px'>INVENTORY_URL not found. Make sure script.js is loading.</h2>";
+        return;
+      }
+
+      const slug = getSlug();
+      if (!slug) {
+        document.body.innerHTML = "<h2 style='padding:40px'>Missing slug. Use: product.html?slug=STREET-TEE</h2>";
+        return;
+      }
+
+    //   const res = await fetch(`${INVENTORY_URL}?_=${Date.now()}`, { cache: "no-store" });
+    //   const products = await res.json();
+    
+    async function getInventoryCached() {
+        const CACHE_KEY = "reignx_inventory_v1";
+        const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
+        const cached = localStorage.getItem(CACHE_KEY);
+        const cachedTime = localStorage.getItem(CACHE_KEY + "_time");
+
+        if (cached && cachedTime && (Date.now() - cachedTime < CACHE_TTL)) {
+            return JSON.parse(cached);
+        }
+
+        const res = await fetch(INVENTORY_URL);
+        const data = await res.json();
+
+        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+        localStorage.setItem(CACHE_KEY + "_time", Date.now());
+
+        return data;
+        }
+
+    
+      const product = products.find(p =>
+        String(p.SLUG || "").toLowerCase() === String(slug).toLowerCase()
+        && String(p.ACTIVE || "TRUE").toUpperCase() !== "FALSE"
+      );
+
+      if (!product) {
+        document.body.innerHTML = "<h2 style='padding:40px'>Product not found</h2>";
+        return;
+      }
+
+      // Build gallery images
+      const images = [
+        toRawGitHub(product.IMAGE_1),
+        toRawGitHub(product.IMAGE_2),
+        toRawGitHub(product.IMAGE_3)
+      ].filter(Boolean);
+
+      // expose for lightbox onclick
+      window.productImages = images;
+
+      // Set product info contract for script.js (cart + inventory matching)
+      const productInfo = document.querySelector(".product-info");
+      productInfo.dataset.id = safeText(product.ITEM_NAME);       // IMPORTANT: matches getInventoryRowForProduct()
+      productInfo.dataset.name = safeText(product.ITEM_NAME);
+      productInfo.dataset.price = Number(product.PRICE_PER_PIECE || 0);
+      productInfo.dataset.image = images[0] || "";
+
+      // Render text
+      document.getElementById("productName").textContent = safeText(product.ITEM_NAME);
+      document.getElementById("productPrice").textContent = `₹${Number(product.PRICE_PER_PIECE || 0)}`;
+
+      // Render main image + thumbs
+      const main = document.getElementById("currentImage");
+      main.src = images[0] || "";
+
+      const thumbs = document.getElementById("thumbs");
+      thumbs.innerHTML = images.map((img, i) => `
+        <img src="${img}" alt="thumb ${i+1}" class="${i === 0 ? "active" : ""}"
+             onclick="changeImage('${img}', ${i})">
+      `).join("");
+
+      // Tabs content
+      document.getElementById("info-desc").innerHTML = `<p>${safeText(product.DESCRIPTION)}</p>`;
+      document.getElementById("info-details").innerHTML = pipeToHtmlList(product.DETAILS);
+      document.getElementById("info-shipping").innerHTML = pipeToHtmlList(product.SHIPPING);
+
+      // Load inventory (script.js function) then apply sizes/price/badges
+      if (typeof loadInventory === "function") {
+        await loadInventory();
+      }
+      if (typeof applyInventoryToProductPage === "function") {
+        applyInventoryToProductPage();
+      }
+
+      // Reveal page UI (script.js also does this, but we do it safely here)
+      const loading = document.getElementById("productLoading");
+      const meta = document.getElementById("productMeta");
+      if (loading) loading.style.display = "none";
+      if (meta) meta.classList.remove("hidden");
+
+      // Keep cart drawer accurate
+      if (typeof updateCartCount === "function") updateCartCount();
+      if (typeof renderCart === "function") renderCart();
+    }
+
+    document.addEventListener("DOMContentLoaded", loadProductPage);
+  </script>
+</body>
+</html>
