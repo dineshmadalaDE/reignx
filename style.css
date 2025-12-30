@@ -1527,3 +1527,96 @@ footer {
     aspect-ratio: 4 / 5;
   }
 }
+
+/* DETAILS / SHIPPING bullet styling */
+.info-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-panel li {
+  padding: 8px 0;
+  font-size: 14px;
+  color: #dcdcdc;
+  position: relative;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+.info-panel li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #ffffff;
+}
+/* ================= COLLECTIONS GRID FIX ================= */
+
+.collections-page {
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 60px;
+}
+
+/* 🔥 CLEAN GRID */
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 48px;
+  align-items: start;
+}
+
+/* PRODUCT CARD */
+.product-card {
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* TITLE OVERLAY */
+.product-title {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+/* ❌ REMOVE GHOST BOXES */
+.collections-grid > div:empty {
+  display: none;
+}
+/* Continue Shopping CTA (Cart Page) */
+.continue-shopping-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.continue-shopping-btn:hover {
+  background: #fff;
+  color: #000;
+}

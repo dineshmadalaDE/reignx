@@ -27,17 +27,28 @@
     <div class="checkout-form">
 	  <h2>Shipping Address</h2>
 
-	  <input class="field" type="text" placeholder="Full Name" required />
-    <input class="field" type="text" placeholder="Email Address" required />
-	  <input class="field" type="text" placeholder="Address Line" required />
-
-	  <div class="grid-2">
-		<input class="field" type="text" placeholder="City" required />
-		<input class="field" type="text" placeholder="Pincode" required />
-	  </div>
-
-	  <input class="field" type="text" placeholder="Phone Number" required />
-
+    <input class="field" type="text" placeholder="Full Name" id="fullName" required />
+    <input class="field" type="email" placeholder="Email Address" id="email" required />
+    <input class="field" type="text" placeholder="Address Line" id="address" required />
+    <div class="grid-2">
+      <input class="field" type="text" placeholder="City" id="city" required />
+      <input
+        class="field"
+        type="text"
+        placeholder="Pincode"
+        id="pincode"
+        maxlength="6"
+        required
+      />
+    </div>
+    <input
+      class="field"
+      type="tel"
+      placeholder="Phone Number"
+      id="phone"
+      maxlength="10"
+      required
+    />
 	  <button class="checkout-btn" onclick="goToPayment()">
 		Continue to Payment
 	  </button>
@@ -62,31 +73,82 @@
 <script src="script.js"></script>
 <script>
 function goToPayment() {
-  const details = {
-    name: document.querySelector('input[placeholder="Full Name"]').value,
-    email: document.querySelector('input[placeholder="Email Address"]').value,
-    address: document.querySelector('input[placeholder="Address Line"]').value,
-    city: document.querySelector('input[placeholder="City"]').value,
-    pincode: document.querySelector('input[placeholder="Pincode"]').value,
-    phone: document.querySelector('input[placeholder="Phone Number"]').value
-  };
+  const name = document.getElementById("fullName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const pincode = document.getElementById("pincode").value.trim();
+  const phone = document.getElementById("phone").value.trim();
 
-  // Basic validation
-  if (!details.name || !details.email || !details.address || !details.city || !details.pincode || !details.phone) {
-    alert("Please fill all address details");
+  // REGEX RULES
+  const nameRegex = /^[A-Za-z ]{3,}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const cityRegex = /^[A-Za-z ]{2,}$/;
+  const pincodeRegex = /^[1-9][0-9]{5}$/;       // Indian pincode
+  const phoneRegex = /^[6-9][0-9]{9}$/;         // Indian mobile
+
+  if (!nameRegex.test(name)) {
+    alert("Please enter a valid full name");
     return;
   }
 
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address");
+    return;
+  }
+
+  if (address.length < 5) {
+    alert("Please enter a valid address");
+    return;
+  }
+
+  if (!cityRegex.test(city)) {
+    alert("Please enter a valid city name");
+    return;
+  }
+
+  if (!pincodeRegex.test(pincode)) {
+    alert("Please enter a valid 6-digit pincode");
+    return;
+  }
+
+  if (!phoneRegex.test(phone)) {
+    alert("Please enter a valid 10-digit mobile number");
+    return;
+  }
+
+  // ✅ All validations passed
+  const details = { name, email, address, city, pincode, phone };
   localStorage.setItem("checkoutDetails", JSON.stringify(details));
   window.location.href = "payment.html";
 }
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    renderCartTotalOnly();
-    updateCartCount();
-  });
-</script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  if (cart.length === 0) {
+    alert("Your cart is empty");
+    window.location.href = "cart.html";
+  }
 
+  renderCartTotalOnly();
+  updateCartCount();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // 🔁 Restore previously entered address details
+  const saved = JSON.parse(localStorage.getItem("checkoutDetails"));
+
+  if (!saved) return;
+
+  if (saved.name) document.getElementById("fullName").value = saved.name;
+  if (saved.email) document.getElementById("email").value = saved.email;
+  if (saved.address) document.getElementById("address").value = saved.address;
+  if (saved.city) document.getElementById("city").value = saved.city;
+  if (saved.pincode) document.getElementById("pincode").value = saved.pincode;
+  if (saved.phone) document.getElementById("phone").value = saved.phone;
+});
+</script>
 </body>
 </html>

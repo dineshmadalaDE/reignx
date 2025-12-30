@@ -20,16 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fadeElements.forEach(el => observer.observe(el));
 });
 
-// function changeImage(src) {
-//   const mainImage = document.getElementById("currentImage");
-//   mainImage.src = src;
-
-//   document.querySelectorAll(".thumbnails img")
-//     .forEach(img => img.classList.remove("active"));
-
-//   event.target.classList.add("active");
-// }
-
 function changeImage(src, index) {
   const mainImage = document.getElementById("currentImage");
   mainImage.src = src;
@@ -265,7 +255,16 @@ function addToCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
 
+  // ✅ Immediately refresh drawer + totals everywhere
+  renderCart();
+  renderCartTotalOnly();
+
+  // Optional: auto-open drawer so user sees item instantly
+  // const drawer = document.getElementById("cart-drawer");
+  // if (drawer && !drawer.classList.contains("open")) drawer.classList.add("open");
+
   alert(`${product.name} (${selectedSize}) added to bag`);
+
 }
 
 
@@ -273,7 +272,14 @@ function addToCart() {
    CART DRAWER TOGGLE
 ================================ */
 function toggleCart() {
-  document.getElementById("cart-drawer")?.classList.toggle("open");
+  // ✅ Always sync UI before showing
+  updateCartCount();
+  renderCart();
+  renderCartTotalOnly();
+
+  const drawer = document.getElementById("cart-drawer");
+  if (!drawer) return;
+  drawer.classList.toggle("open");
 }
 
 /* ================================
@@ -305,12 +311,21 @@ function renderCart() {
 	  cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
 	  totalEl.textContent = "0";
 
-	  const checkoutBtn = document.querySelector(".checkout-btn");
-	  if (checkoutBtn) {
-		checkoutBtn.disabled = true;
-		checkoutBtn.style.opacity = "0.4";
-		checkoutBtn.style.pointerEvents = "none";
-	  }
+    // const drawerCheckoutLink = document.querySelector("#cart-drawer .checkout-btn");
+    // if (drawerCheckoutLink) {
+    //   drawerCheckoutLink.style.opacity = "1";
+    //   drawerCheckoutLink.style.pointerEvents = "auto";
+    // }
+
+  // ✅ Disable checkout button (CART PAGE)
+  const checkoutBtn = document.querySelector(
+    ".cart-page .checkout-btn"
+    );
+    if (checkoutBtn) {
+      checkoutBtn.disabled = true;
+      checkoutBtn.style.opacity = "0.4";
+      checkoutBtn.style.cursor = "not-allowed";
+    }
 
 	  updateCartCount();
 	  return;
@@ -520,6 +535,68 @@ function renderCartTotalOnly() {
   if (!totalEl) return;
   totalEl.textContent = String(getCartTotalAmount());
 }
+
+
+/* ================================
+   COLLECTIONS – DYNAMIC PRODUCTS
+================================ */
+async function renderCollections() {
+  const grid = document.getElementById("product-grid");
+  if (!grid) return;
+
+  const CACHE_KEY = "reignx_inventory_v1";
+
+  // 1️⃣ INSTANT RENDER from cache
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
+    try {
+      const products = JSON.parse(cached);
+      renderCollectionGrid(products);
+    } catch {}
+  }
+
+  // 2️⃣ BACKGROUND REFRESH (no blocking UI)
+  try {
+    const res = await fetch(INVENTORY_URL);
+    const products = await res.json();
+
+    localStorage.setItem(CACHE_KEY, JSON.stringify(products));
+    localStorage.setItem(CACHE_KEY + "_time", Date.now());
+
+    // Optional: re-render only if grid was empty
+    if (!grid.children.length) {
+      renderCollectionGrid(products);
+    }
+  } catch (err) {
+    console.error("Collections load failed", err);
+  }
+}
+
+function renderCollectionGrid(products) {
+  const grid = document.getElementById("product-grid");
+  if (!grid) return;
+
+  const activeProducts = products.filter(
+    p => String(p.ACTIVE).toUpperCase() === "TRUE"
+  );
+
+  grid.innerHTML = activeProducts.map(p => `
+    <a href="product.html?slug=${encodeURIComponent(p.SLUG)}" class="product-card">
+      <img src="${p.IMAGE_1}" alt="${p.ITEM_NAME}" loading="lazy" />
+      <div class="overlay"><span>${p.ITEM_NAME}</span></div>
+    </a>
+  `).join("");
+}
+
+
+document.addEventListener("DOMContentLoaded", renderCollections);
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch(INVENTORY_URL).then(r => r.json()).then(data => {
+    localStorage.setItem("reignx_inventory_v1", JSON.stringify(data));
+    localStorage.setItem("reignx_inventory_v1_time", Date.now());
+  }).catch(() => {});
+});
 
 
 // remove after launch
