@@ -259,10 +259,6 @@ function addToCart() {
   renderCart();
   renderCartTotalOnly();
 
-  // Optional: auto-open drawer so user sees item instantly
-  // const drawer = document.getElementById("cart-drawer");
-  // if (drawer && !drawer.classList.contains("open")) drawer.classList.add("open");
-
   alert(`${product.name} (${selectedSize}) added to bag`);
 
 }
@@ -310,13 +306,7 @@ function renderCart() {
   if (cart.length === 0) {
 	  cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
 	  totalEl.textContent = "0";
-
-    // const drawerCheckoutLink = document.querySelector("#cart-drawer .checkout-btn");
-    // if (drawerCheckoutLink) {
-    //   drawerCheckoutLink.style.opacity = "1";
-    //   drawerCheckoutLink.style.pointerEvents = "auto";
-    // }
-
+    
   // ✅ Disable checkout button (CART PAGE)
   const checkoutBtn = document.querySelector(
     ".cart-page .checkout-btn"
