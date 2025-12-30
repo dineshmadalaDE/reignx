@@ -45,10 +45,28 @@
         />
 
         <p style="font-size:13px;opacity:0.6;margin-top:10px">
-          After payment, click <b>Payment Done</b>
+          After payment, enter <b>UPI ID and then click I have paid button</b>
         </p>
       </div>
-
+      <div style="margin-top:20px">
+        <label style="display:block;margin-bottom:6px;opacity:0.85">
+          UPI Transaction ID / UTR
+        </label>
+        <input
+          type="text"
+          id="utr"
+          placeholder="Enter UPI Transaction ID"
+          style="
+            width:100%;
+            padding:14px;
+            border-radius:12px;
+            border:1px solid rgba(255,255,255,0.2);
+            background:rgba(255,255,255,0.06);
+            color:#fff;
+          "
+          required
+        />
+      </div>
       <button class="checkout-btn" onclick="confirmUpiPayment()">
         I Have Paid
       </button>
@@ -80,7 +98,26 @@
 <script>
   renderCartTotalOnly();
 </script>
+<script>
+  function generateOrderId() {
+  const now = new Date();
 
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const yyyy = now.getFullYear();
+
+  const dateKey = `${mm}${dd}${yyyy}`; // 12302025
+  const storageKey = `reignx_order_count_${dateKey}`;
+
+  let count = Number(localStorage.getItem(storageKey)) || 0;
+
+  const orderId = `RX${dateKey}-${count}`;
+
+  localStorage.setItem(storageKey, count + 1);
+
+  return orderId;
+}
+</script>
 <script>
 async function confirmUpiPayment() {
   // 🔒 Disable back navigation immediately
@@ -89,6 +126,21 @@ async function confirmUpiPayment() {
 
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const user = JSON.parse(localStorage.getItem("checkoutDetails"));
+  const utr = document.getElementById("utr")?.value.trim();
+  // 🧾 Generate Order ID (daily incremental)
+  const ORDER_ID = generateOrderId();
+
+  if (!utr || utr.length < 6) {
+    alert("Please enter a valid UPI Transaction ID");
+    return;
+  }
+
+  const payBtn = document.querySelector(".checkout-btn");
+  if (payBtn) {
+    payBtn.disabled = true;
+    payBtn.style.opacity = "0.6";
+    payBtn.style.cursor = "not-allowed";
+  }
 
   if (!cart.length || !user) {
     alert("Order information missing. Please try again.");
@@ -127,7 +179,7 @@ async function confirmUpiPayment() {
     .join(", ");
 
   const fields = {
-    _subject: "NEW UPI ORDER — REIGNX",
+    _subject: `NEW ORDER ${ORDER_ID} — REIGNX`,
     _captcha: "false",
     _next: "https://reignx.in/success.html",
 
@@ -137,9 +189,10 @@ async function confirmUpiPayment() {
     customer_address: `${user.address}, ${user.city} - ${user.pincode}`,
 
     payment_method: "UPI",
-
+    upi_transaction_id: utr,
     // 🔥 THIS FIXES URBAN JACKET EMAIL ISSUE
     products: productList,
+    order_id: ORDER_ID,
 
     order_details: JSON.stringify(safeCart, null, 2)
   };
@@ -161,7 +214,7 @@ async function confirmUpiPayment() {
     console.warn("Inventory update failed:", e);
     // ✅ DO NOT STOP EMAIL FLOW
   }
-
+  localStorage.setItem("last_order_id", ORDER_ID);
   // Clear cart + checkout info
   localStorage.removeItem("cart");
   localStorage.removeItem("checkoutDetails");
